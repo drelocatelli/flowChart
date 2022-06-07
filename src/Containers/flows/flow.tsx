@@ -1,3 +1,5 @@
+//@ts-nocheck
+
 import React, { useCallback, useState } from 'react';
 import ReactFlow, { addEdge, applyEdgeChanges, applyNodeChanges, Background, Controls, EdgeChange, MiniMap, NodeChange } from 'react-flow-renderer';
 import { initialEdges, initialNodes, principalsNodes, principalsNodesChanges, principalsNodesName } from './flowItems';
@@ -69,7 +71,6 @@ function Flow({ width, height }: PageProps) {
 
   const onAdd = useCallback((form) => {
     const nodeQuest = form.querySelector('.nodeQuest');
-    const nodeType = form.querySelector('select[name=nodeType]');
 
     const attribName: string = (nodeQuest.value == '') ? `Objeto` : nodeQuest.value;
 
@@ -77,7 +78,7 @@ function Flow({ width, height }: PageProps) {
       id: getNodeId(),
       data: { label: attribName },
       position: { x: 10, y: 10 },
-      type: nodeType.value,
+      // type: nodeType.value,
       extent: 'parent',
       parentNode: principalsNodesName[1]
     };
@@ -108,7 +109,6 @@ function Flow({ width, height }: PageProps) {
       <h3>Editor</h3> <br />
       <form onSubmit={(e) => handleForm(e)}>
         <input type="text" className='nodeQuest' placeholder='Digite sua mensagem...' /> <br />
-        <input type="text" className='nodeAns' placeholder="Digite uma resposta..." />
         <br />
         Tipo:
         <select name="nodeType">
